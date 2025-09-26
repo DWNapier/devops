@@ -1,10 +1,11 @@
 # DevOps Global Online
 ## Status
-![workflow](https://github.com/DWNapier/devops/actions/workflows/main.yml/badge.svg)
-
-![GitHub License](https://img.shields.io/github/license/DWNapier/devops)
-
-![GitHub Release](https://img.shields.io/github/v/release/DWNapier/devops)
+|                | |
+|----------------| ---|
+| Master Status  | ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/DWNapier/devops/main.yml)|
+| Develop Status | ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/DWNapier/devops/main.yml?branch=develop)|
+| License        | ![GitHub License](https://img.shields.io/github/license/DWNapier/devops)|
+| Release        | ![GitHub Release](https://img.shields.io/github/v/release/DWNapier/devops)|
 
 ## Purpose
 This repository consists of the lab work completed by myself, David Watkin, as part of the DevOps Global Online course at Edinburgh Napier University.
