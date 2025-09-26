@@ -13,6 +13,11 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
+      - name: Setup network
+        run: |
+          docker network create --driver bridge devops
+          docker pull mongo
+          docker run -d --name mongo-dbserver --network devops mongo
       - name: Compile with Maven
         run: mvn compile
       - name: Build Docker image
