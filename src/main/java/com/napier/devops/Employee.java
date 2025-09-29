@@ -36,4 +36,19 @@ public class Employee
      * Employee's manager
      */
     public String manager;
+
+    /**
+     * Display employee information
+     */
+    @Override
+    public String toString()
+    {
+        return emp_no + " "
+                + first_name + " "
+                + last_name + "\n"
+                + title + "\n"
+                + "Salary: " + salary + "\n"
+                + dept_name + "\n"
+                + "Manager: " + manager + "\n";
+    }
 }
