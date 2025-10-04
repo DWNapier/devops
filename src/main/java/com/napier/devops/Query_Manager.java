@@ -1,6 +1,7 @@
 package com.napier.devops;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Query_Manager
 {
@@ -49,6 +50,45 @@ public class Query_Manager
         {
             System.out.println(e.getMessage());
             System.out.println("Failed to get employee details");
+            return null;
+        }
+    }
+
+    /**
+     * Get salary information from database for all employees
+     */
+    public ArrayList<Employee> getAllSalaries(Connection con)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT e.emp_no, e.first_name, e.last_name, s.salary "
+                            + "FROM employees e, salaries s "
+                            + "WHERE e.emp_no = s.emp_no AND s.to_date = '9999-01-01' "
+                            + "ORDER BY e.emp_no ASC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Create array to hold results.
+            ArrayList<Employee> employees = new ArrayList<>();
+            // Return a list of all employees and their salaries.
+            while (rset.next())
+            {
+                Employee emp = new Employee();
+                emp.emp_no = rset.getInt("e.emp_no");
+                emp.first_name = rset.getString("e.first_name");
+                emp.last_name = rset.getString("e.last_name");
+                emp.salary = rset.getInt("s.salary");
+                employees.add(emp);
+            }
+            return employees;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get salary details");
             return null;
         }
     }
