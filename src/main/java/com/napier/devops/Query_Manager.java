@@ -71,9 +71,55 @@ public class Query_Manager
                             + "ORDER BY e.emp_no ASC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Create array to hold results.
-            ArrayList<Employee> employees = new ArrayList<>();
-            // Return a list of all employees and their salaries.
+            return CompileSalaryResults(rset);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get salary details");
+            return null;
+        }
+    }
+
+    /**
+     * Get salary information from database for all employees in a specified role.
+     */
+    public ArrayList<Employee> getSalariesByRole(String role, Connection con)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT e.emp_no, e.first_name, e.last_name, s.salary "
+                            + "FROM titles t "
+                            + "JOIN employees e ON t.emp_no = e.emp_no "
+                            + "JOIN salaries s ON t.emp_no = s.emp_no AND s.to_date = '9999-01-01' "
+                            + "WHERE t.title = '" + role + "' AND t.to_date = '9999-01-01' "
+                            + "ORDER BY e.emp_no ASC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            return CompileSalaryResults(rset);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get salary details");
+            return null;
+        }
+    }
+
+    /**
+     * Package salary information for return.
+     */
+    public ArrayList<Employee> CompileSalaryResults(ResultSet rset)
+    {
+        // Create array to hold results.
+        ArrayList<Employee> employees = new ArrayList<Employee>();
+        // Return a list of all employees and their salaries.
+        try
+        {
             while (rset.next())
             {
                 Employee emp = new Employee();
@@ -85,7 +131,7 @@ public class Query_Manager
             }
             return employees;
         }
-        catch (Exception e)
+    catch (Exception e)
         {
             System.out.println(e.getMessage());
             System.out.println("Failed to get salary details");
@@ -93,3 +139,4 @@ public class Query_Manager
         }
     }
 }
+
